@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  loadbalancer:
+    build:
+      context: ./load_balancer
+    ports:
+      - "5000:5000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+    networks:
+      load_balancer_network:
+        aliases:
+          - "load-balancer"
+    container_name: load-balancer
+    image: load-balancer
+
+  server1: &server
+    build:
+      context: ./server
+    expose:
+      - "5000"
+    networks:
+      load_balancer_network:
+        aliases:
+          - "Server-1"
+    container_name: Server-1
+    image: server
+    environment:
+      - SERVER_ID='Server-1'
+
+  server2:
+    <<: *server
+    expose:
+      - "5000"
+    networks:
+      load_balancer_network:
+        aliases:
+          - "Server-2"
+    container_name: Server-2
+    environment:
+      - SERVER_ID='Server-2'
+
+  server3:
+    <<: *server
+    expose:
+      - "5000"
+    networks:
+      load_balancer_network:
+        aliases:
+          - "Server-3"
+    container_name: Server-3
+    environment:
+      - SERVER_ID='Server-3'
+
+networks:
+  load_balancer_network:
+    name: load_balancer_network
