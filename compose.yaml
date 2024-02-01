@@ -28,7 +28,7 @@ services:
     container_name: Server-1
     image: server
     environment:
-      - SERVER_ID='Server-1'
+      - SERVER_ID=Server-1
 
   server2:
     <<: *server
@@ -40,7 +40,7 @@ services:
           - "Server-2"
     container_name: Server-2
     environment:
-      - SERVER_ID='Server-2'
+      - SERVER_ID=Server-2
 
   server3:
     <<: *server
@@ -52,7 +52,7 @@ services:
           - "Server-3"
     container_name: Server-3
     environment:
-      - SERVER_ID='Server-3'
+      - SERVER_ID=Server-3
 
 networks:
   load_balancer_network:
