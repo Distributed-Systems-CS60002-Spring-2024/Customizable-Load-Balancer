@@ -22,7 +22,8 @@ The above image suggests that server 1 is the one handling more than 80% of the 
 
 Launched 10000 async requests on **N = 3** server containers and reported the request count handled by each server instance in a line chart
 
-<img src=images/S3-line.jpg width="250" >
+<img src=images/S3-line.jpg width="250" >+
+
 
 The above image suggests that server 3 is the one handling more than 50% of the total requests. The hash function in the load balancer handles the no of requests going to all servers which divides the requests unequally like shown.
 
